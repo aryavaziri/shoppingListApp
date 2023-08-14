@@ -6,5 +6,4 @@ const page = ({ params }) => {
     </section>
   );
 };
-
 export default page;

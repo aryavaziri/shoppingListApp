@@ -7,11 +7,14 @@ export const POST = async (request, { params }) => {
   try {
     await connectToDB();
     const list = await List.findById(params.listId).populate("creator");
-    console.log(list.items);
-    list.items.push({ name: item });
-    console.log(list.items);
-
-    // const newItem = new List({ creator: userId, title });
+    const temp = list.items.findIndex((val) => {
+      return val.name == item;
+    });
+    if (temp == -1) {
+      list.items.push({ name: item });
+    } else {
+      list.items[temp].done = false;
+    }
     await list.save();
     return new Response(JSON.stringify(list), { status: 200 });
   } catch (error) {

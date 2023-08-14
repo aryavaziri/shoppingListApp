@@ -1,0 +1,22 @@
+Folder PATH listing
+Volume serial number is 38BE-AD94
+C:.
++---api
+¦   +---auth
+¦   ¦   +---[...nextauth]
+¦   +---list
+¦       +---addItem
+¦       ¦   +---[listId]
+¦       +---checkItem
+¦       ¦   +---[...id]
+¦       +---create
+¦       +---delete
+¦       ¦   +---[listId]
+¦       +---delItem
+¦       ¦   +---[...id]
+¦       +---user
+¦       ¦   +---[userId]
+¦       +---[listId]
++---create-list
++---list
+    +---[id]
