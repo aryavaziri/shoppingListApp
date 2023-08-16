@@ -8,7 +8,7 @@ const page = () => {
   const { data: session } = useSession();
   const [list, setList] = useState();
   const fetchLists = () => {
-    fetch(`/api/list/user/${session.user.id}`)
+    fetch(`/api/list`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

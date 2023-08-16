@@ -15,7 +15,7 @@ const List = ({ listId }) => {
   const addItem = (e) => {
     e.preventDefault();
     setToggle(false);
-    fetch(`/api/list/addItem/${listId}`, {
+    fetch(`/api/list/${listId}`, {
       method: "POST",
       body: JSON.stringify({
         item: item,
@@ -23,34 +23,42 @@ const List = ({ listId }) => {
     })
       .then((response) => {
         if (response.ok) {
-          console.log("OK");
-          setItem("");
-          fetchList();
+          return response.json();
         }
+      })
+      .then((data) => {
+        setList(data);
+        setItem("");
       })
       .catch((error) => {
         console.log(error);
       });
   };
   const delItem = (itemId) => {
-    fetch(`/api/list/delItem/${list._id}/${itemId}`)
+    fetch(`/api/list/${list._id}/${itemId}`, { method: "DELETE" })
       .then((response) => {
         if (response.ok) {
-          console.log("OK");
-          fetchList();
+          return response.json();
         }
+      })
+      .then((data) => {
+        setList(data);
       })
       .catch((error) => {
         console.log(error);
       });
   };
   const checkItem = (itemId) => {
-    fetch(`/api/list/checkItem/${list._id}/${itemId}`)
+    fetch(`/api/list/${list._id}/${itemId}`, {
+      method: "PUT",
+    })
       .then((response) => {
         if (response.ok) {
-          console.log("OK");
-          fetchList();
+          return response.json();
         }
+      })
+      .then((data) => {
+        setList(data);
       })
       .catch((error) => {
         console.log(error);
@@ -74,11 +82,13 @@ const List = ({ listId }) => {
   }, []);
   return (
     <section className="shadow duration-300 rounded p-2 m-2">
-      <h1 className="text-2xl my-2 text-center">{list?.title.toUpperCase()}</h1>
+      <h1 className="text-2xl my-2 text-center">
+        {list?.title?.toUpperCase()}
+      </h1>
 
-      {list?.items.length ? (
+      {list?.items?.length ? (
         <ul className="py-2">
-          {list.items.map((item) => {
+          {list.items?.map((item) => {
             return (
               <li
                 className="border rounded my-1 overflow-hidden"
@@ -98,17 +108,17 @@ const List = ({ listId }) => {
                     className="hover:scale-[1.2] duration-300 hover:text-emerald-500"
                     onClick={(e) => {
                       e.preventDefault();
-                      checkItem(item._id);
+                      checkItem(item?._id);
                     }}
                   >
                     <AiOutlineCheck />
                   </button>
                   <span
                     className={`${
-                      item.done && "line-through"
+                      item?.done && "line-through"
                     } decoration-orange-600 decoration-2`}
                   >
-                    {item.name}
+                    {item?.name}
                   </span>
                 </div>
               </li>

@@ -2,7 +2,7 @@ import { Schema, model, models } from "mongoose";
 
 const listSchema = new Schema({
   title: String,
-  items: [{ name: String, done: { type: Boolean, default: false } }],
+  items: [{ type: Schema.Types.ObjectId, ref: "Item" }],
   collaborators: [{ type: Schema.Types.ObjectId, ref: "User" }],
   creator: { type: Schema.Types.ObjectId, ref: "User" },
 });

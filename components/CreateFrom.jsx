@@ -10,11 +10,10 @@ const CreateFrom = () => {
 
   const createPrompt = (e) => {
     e.preventDefault();
-    fetch("/api/list/create", {
+    fetch("/api/list", {
       method: "POST",
       body: JSON.stringify({
         title: list.title,
-        userId: session?.user.id,
       }),
     })
       .then((response) => {
